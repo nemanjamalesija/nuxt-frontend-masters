@@ -7,9 +7,15 @@ type TodoType = {
   completed: boolean;
 };
 
+type PhotoType = {
+  albumId: string;
+  thumbnailUrl: string;
+};
+
 export default defineNuxtComponent({
   data: () => ({
     todoList: [] as TodoType[],
+    photos: [] as PhotoType[],
   }),
 
   methods: {
@@ -17,6 +23,12 @@ export default defineNuxtComponent({
       fetch('https://jsonplaceholder.typicode.com/todos/')
         .then((response) => response.json())
         .then((json) => (this.todoList = json));
+    },
+
+    async fetchPhotos() {
+      const res = await fetch('https://jsonplaceholder.typicode.com/photos');
+      const data = await res.json();
+      this.photos = data;
     },
   },
 });
@@ -30,6 +42,13 @@ export default defineNuxtComponent({
       <li v-for="todo in todoList" :key="`todo-id-${todo.id}`">
         <input type="checkbox" :checked="todo.completed" />
         {{ todo.title }}
+      </li>
+    </ul>
+
+    <ul>
+      <button @click="fetchPhotos">Fetch photos</button>
+      <li v-for="photo in photos" :key="`photo-id-${photo.albumId}`">
+        <img :src="photo.thumbnailUrl" />
       </li>
     </ul>
   </div>
