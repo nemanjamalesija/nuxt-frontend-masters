@@ -1,4 +1,4 @@
-<script lang="ts">
+<!-- <script lang="ts">
 import { defineNuxtComponent } from 'nuxt/app';
 
 type TodoType = {
@@ -52,4 +52,19 @@ export default defineNuxtComponent({
       </li>
     </ul>
   </div>
+</template> -->
+
+<script setup lang="ts"></script>
+<template>
+  <NuxtLayout>
+    <nav>
+      <ul>
+        <li><NuxtLink to="dashboard">Dashboard</NuxtLink></li>
+        <li><NuxtLink to="/">Home</NuxtLink></li>
+        <li><NuxtLink to="/mast">Mast</NuxtLink></li>
+      </ul>
+    </nav>
+
+    <NuxtPage />
+  </NuxtLayout>
 </template>
